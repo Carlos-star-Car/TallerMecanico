@@ -17,6 +17,9 @@ public class FrmFactura extends javax.swing.JFrame {
      */
     public FrmFactura() {
         initComponents();
+            this.setSize(700, 500); // Tamaño unificado
+    this.setLocationRelativeTo(null); // Centrar en pantalla
+    this.setResizable(false); // Evita que se redimensione
     }
 
     /**
@@ -28,21 +31,320 @@ public class FrmFactura extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnVolver = new javax.swing.JButton();
+        btnNombreCliente1 = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDetalleFactura = new javax.swing.JTable();
+        AgregarDetalle = new javax.swing.JPanel();
+        lblConcepto = new javax.swing.JLabel();
+        lblCantidad = new javax.swing.JLabel();
+        lblPrecioUnitario = new javax.swing.JLabel();
+        txtConcepto = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
+        txtPrecioUnitario = new javax.swing.JTextField();
+        btnLimpiarDerFact = new javax.swing.JButton();
+        btnAgregarADetFact = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnModDetFact = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        lblCodFactura = new javax.swing.JLabel();
+        txtCodFactura = new javax.swing.JTextField();
+        lblCodigoOrden = new javax.swing.JLabel();
+        jCBCodOrden = new javax.swing.JComboBox<>();
+        lblFeEmision = new javax.swing.JLabel();
+        txtFeEmision1 = new javax.swing.JTextField();
+        lblSubtotal = new javax.swing.JLabel();
+        txtSubtotal1 = new javax.swing.JTextField();
+        btnTotal1 = new javax.swing.JLabel();
+        txtTotal1 = new javax.swing.JTextField();
+        btnTotal2 = new javax.swing.JLabel();
+        txtTotal2 = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1210, 1200));
+        setSize(new java.awt.Dimension(1200, 1200));
+
+        btnVolver.setBackground(new java.awt.Color(100, 205, 255));
+        btnVolver.setText("MENU PRINCIPAL");
+        btnVolver.setAlignmentX(0.5F);
+        btnVolver.setPreferredSize(new java.awt.Dimension(125, 20));
+        btnVolver.addActionListener(this::btnVolverActionPerformed);
+
+        btnNombreCliente1.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        btnNombreCliente1.setText("FACTURACIÓN");
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnGuardar.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnGuardar.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        btnModificar.setText("Modificar");
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnLimpiar.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnLimpiar.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnEliminar.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnEliminar.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        tblDetalleFactura.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblDetalleFactura);
+
+        lblConcepto.setText("Concepto:");
+
+        lblCantidad.setText("Cantidad:");
+
+        lblPrecioUnitario.setText("Precio unitario");
+
+        txtPrecioUnitario.addActionListener(this::txtPrecioUnitarioActionPerformed);
+
+        btnLimpiarDerFact.setText("Limpiar detalle");
+        btnLimpiarDerFact.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnLimpiarDerFact.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnLimpiarDerFact.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        btnAgregarADetFact.setText("Agregar a detalle factura");
+        btnAgregarADetFact.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnAgregarADetFact.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnAgregarADetFact.setPreferredSize(new java.awt.Dimension(80, 23));
+        btnAgregarADetFact.addActionListener(this::btnAgregarADetFactActionPerformed);
+
+        btnCancelar.setText("Cancelar detalle");
+        btnCancelar.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnCancelar.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnCancelar.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        btnModDetFact.setText("Modificar Detalle");
+        btnModDetFact.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnModDetFact.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnModDetFact.setPreferredSize(new java.awt.Dimension(80, 23));
+        btnModDetFact.addActionListener(this::btnModDetFactActionPerformed);
+
+        javax.swing.GroupLayout AgregarDetalleLayout = new javax.swing.GroupLayout(AgregarDetalle);
+        AgregarDetalle.setLayout(AgregarDetalleLayout);
+        AgregarDetalleLayout.setHorizontalGroup(
+            AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AgregarDetalleLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblConcepto)
+                    .addComponent(lblPrecioUnitario)
+                    .addComponent(lblCantidad))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtConcepto, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                    .addComponent(txtCantidad)
+                    .addComponent(txtPrecioUnitario)))
+            .addGroup(AgregarDetalleLayout.createSequentialGroup()
+                .addGroup(AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AgregarDetalleLayout.createSequentialGroup()
+                        .addComponent(btnAgregarADetFact, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(AgregarDetalleLayout.createSequentialGroup()
+                        .addComponent(btnLimpiarDerFact, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnModDetFact, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        AgregarDetalleLayout.setVerticalGroup(
+            AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AgregarDetalleLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblConcepto)
+                    .addComponent(txtConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCantidad)
+                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrecioUnitario)
+                    .addComponent(txtPrecioUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimpiarDerFact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModDetFact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarADetFact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        lblCodFactura.setText("Código factura");
+
+        lblCodigoOrden.setText("Código de orden");
+
+        jCBCodOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lblFeEmision.setText("Fecha de emisión dd/MM/YY");
+
+        lblSubtotal.setText("Subtotal");
+
+        btnTotal1.setText("Dirección");
+
+        btnTotal2.setText("Total");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblCodFactura)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtCodFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblCodigoOrden)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCBCodOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblFeEmision)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addComponent(txtFeEmision1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnTotal1)
+                        .addGap(100, 100, 100)
+                        .addComponent(txtTotal1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblSubtotal)
+                        .addGap(104, 104, 104)
+                        .addComponent(txtSubtotal1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnTotal2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTotal2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCodFactura)
+                    .addComponent(txtCodFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCodigoOrden)
+                    .addComponent(jCBCodOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFeEmision)
+                    .addComponent(txtFeEmision1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTotal1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSubtotal)
+                    .addComponent(txtSubtotal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTotal2)
+                    .addComponent(txtTotal2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnModificar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(AgregarDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(277, 277, 277)
+                        .addComponent(btnNombreCliente1)))
+                .addGap(0, 562, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(btnNombreCliente1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(AgregarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(550, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+// Creamos y mostramos nuevamente el menú principal
+    FrmMenuPrincipal menu = new FrmMenuPrincipal();
+    menu.setVisible(true);
+    menu.setLocationRelativeTo(null);
+    
+    // Cerramos la ventana actual de clientes
+    this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnAgregarADetFactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarADetFactActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarADetFactActionPerformed
+
+    private void btnModDetFactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModDetFactActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnModDetFactActionPerformed
+
+    private void txtPrecioUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioUnitarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioUnitarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +372,37 @@ public class FrmFactura extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AgregarDetalle;
+    private javax.swing.JButton btnAgregarADetFact;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnLimpiarDerFact;
+    private javax.swing.JButton btnModDetFact;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JLabel btnNombreCliente1;
+    private javax.swing.JLabel btnTotal1;
+    private javax.swing.JLabel btnTotal2;
+    private javax.swing.JButton btnVolver;
+    private javax.swing.JComboBox<String> jCBCodOrden;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCantidad;
+    private javax.swing.JLabel lblCodFactura;
+    private javax.swing.JLabel lblCodigoOrden;
+    private javax.swing.JLabel lblConcepto;
+    private javax.swing.JLabel lblFeEmision;
+    private javax.swing.JLabel lblPrecioUnitario;
+    private javax.swing.JLabel lblSubtotal;
+    private javax.swing.JTable tblDetalleFactura;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtCodFactura;
+    private javax.swing.JTextField txtConcepto;
+    private javax.swing.JTextField txtFeEmision1;
+    private javax.swing.JTextField txtPrecioUnitario;
+    private javax.swing.JTextField txtSubtotal1;
+    private javax.swing.JTextField txtTotal1;
+    private javax.swing.JTextField txtTotal2;
     // End of variables declaration//GEN-END:variables
 }
