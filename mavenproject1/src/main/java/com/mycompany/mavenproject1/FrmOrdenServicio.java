@@ -17,6 +17,9 @@ public class FrmOrdenServicio extends javax.swing.JFrame {
      */
     public FrmOrdenServicio() {
         initComponents();
+            this.setSize(900, 700); // Tamaño unificado
+    this.setLocationRelativeTo(null); // Centrar en pantalla
+    this.setResizable(false); // Evita que se redimensione
     }
 
     /**
@@ -28,21 +31,208 @@ public class FrmOrdenServicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnVolver = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnNombreCliente1 = new javax.swing.JLabel();
+        btnlimpiar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        lblNombreCliente = new javax.swing.JLabel();
+        jCBCodOrden = new javax.swing.JComboBox<>();
+        txtApellidoCliente = new javax.swing.JTextField();
+        btnApellidoCliente = new javax.swing.JLabel();
+        txtTelCliente = new javax.swing.JTextField();
+        btnTelefonoCliente = new javax.swing.JLabel();
+        txtDireccioncCliente = new javax.swing.JTextField();
+        btnDireccionCliente = new javax.swing.JLabel();
+        jCBPlaca = new javax.swing.JComboBox<>();
+        btnCorreoCliente = new javax.swing.JLabel();
+        jCBMecanicos = new javax.swing.JComboBox<>();
+        btnCorreoCliente1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1024, 768));
+
+        btnVolver.setBackground(new java.awt.Color(100, 205, 255));
+        btnVolver.setText("MENU PRINCIPAL");
+        btnVolver.setAlignmentX(0.5F);
+        btnVolver.setMaximumSize(new java.awt.Dimension(125, 20));
+        btnVolver.setMinimumSize(new java.awt.Dimension(120, 20));
+        btnVolver.setPreferredSize(new java.awt.Dimension(125, 20));
+        btnVolver.addActionListener(this::btnVolverActionPerformed);
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnGuardar.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnGuardar.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        btnModificar.setText("Modificar");
+
+        btnNombreCliente1.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        btnNombreCliente1.setText("ORDEN DE SERVICIO");
+
+        btnlimpiar.setText("Limpiar");
+        btnlimpiar.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnlimpiar.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnlimpiar.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnEliminar.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnEliminar.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        lblNombreCliente.setText("Código de orden");
+
+        jCBCodOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnApellidoCliente.setText("Fecha de ingreso");
+
+        btnTelefonoCliente.setText("Estado");
+
+        btnDireccionCliente.setText("Diagnóstico");
+
+        jCBPlaca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnCorreoCliente.setText("Placa");
+
+        jCBMecanicos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnCorreoCliente1.setText("Código Mecánico");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnApellidoCliente)
+                    .addComponent(btnTelefonoCliente)
+                    .addComponent(lblNombreCliente)
+                    .addComponent(btnDireccionCliente)
+                    .addComponent(btnCorreoCliente)
+                    .addComponent(btnCorreoCliente1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jCBMecanicos, 0, 140, Short.MAX_VALUE)
+                    .addComponent(jCBPlaca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtDireccioncCliente)
+                    .addComponent(txtTelCliente)
+                    .addComponent(txtApellidoCliente)
+                    .addComponent(jCBCodOrden, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCBCodOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombreCliente))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtApellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnApellidoCliente))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTelefonoCliente))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDireccioncCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDireccionCliente))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCBPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCorreoCliente))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCBMecanicos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCorreoCliente1))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(300, 80));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(300, 80));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable1.setMaximumSize(new java.awt.Dimension(80, 300));
+        jTable1.setMinimumSize(new java.awt.Dimension(80, 300));
+        jTable1.setPreferredSize(new java.awt.Dimension(80, 300));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnlimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnModificar))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnNombreCliente1)
+                .addGap(192, 192, 192))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnNombreCliente1)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnlimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        FrmMenuPrincipal menu = new FrmMenuPrincipal();
+        menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
+
+        // Cerramos la ventana actual de clientes
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +260,26 @@ public class FrmOrdenServicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnApellidoCliente;
+    private javax.swing.JLabel btnCorreoCliente;
+    private javax.swing.JLabel btnCorreoCliente1;
+    private javax.swing.JLabel btnDireccionCliente;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JLabel btnNombreCliente1;
+    private javax.swing.JLabel btnTelefonoCliente;
+    private javax.swing.JButton btnVolver;
+    private javax.swing.JButton btnlimpiar;
+    private javax.swing.JComboBox<String> jCBCodOrden;
+    private javax.swing.JComboBox<String> jCBMecanicos;
+    private javax.swing.JComboBox<String> jCBPlaca;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblNombreCliente;
+    private javax.swing.JTextField txtApellidoCliente;
+    private javax.swing.JTextField txtDireccioncCliente;
+    private javax.swing.JTextField txtTelCliente;
     // End of variables declaration//GEN-END:variables
 }

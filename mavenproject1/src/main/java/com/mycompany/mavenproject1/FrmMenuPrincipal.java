@@ -17,6 +17,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
      */
     public FrmMenuPrincipal() {
         initComponents();
+    this.setSize(900, 700); // Tamaño unificado
+    this.setLocationRelativeTo(null); // Centrar en pantalla
+    this.setResizable(false); // Evita que se redimensione
     }
 
     /**
@@ -28,21 +31,148 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnClientes = new javax.swing.JButton();
+        btnVehiculos = new javax.swing.JButton();
+        btnMecanicos = new javax.swing.JButton();
+        btnCategoriaRepuesto = new javax.swing.JButton();
+        btnOrdenServicio = new javax.swing.JButton();
+        btnFactura = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnRepuestos = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(51, 153, 255));
+        setForeground(java.awt.Color.white);
+        setPreferredSize(new java.awt.Dimension(1024, 768));
+        setResizable(false);
+
+        btnClientes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnClientes.setText("Gestión de clientes");
+        btnClientes.addActionListener(this::btnClientesActionPerformed);
+
+        btnVehiculos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnVehiculos.setText("Gestión de Vehículos");
+        btnVehiculos.addActionListener(this::btnVehiculosActionPerformed);
+
+        btnMecanicos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnMecanicos.setText("Gestión de Mecánicos");
+        btnMecanicos.addActionListener(this::btnMecanicosActionPerformed);
+
+        btnCategoriaRepuesto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCategoriaRepuesto.setText("Categoría Repuestos");
+        btnCategoriaRepuesto.addActionListener(this::btnCategoriaRepuestoActionPerformed);
+
+        btnOrdenServicio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnOrdenServicio.setText("Gestión de Servicio");
+        btnOrdenServicio.addActionListener(this::btnOrdenServicioActionPerformed);
+
+        btnFactura.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnFactura.setText("Facturación");
+        btnFactura.addActionListener(this::btnFacturaActionPerformed);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Sistema de Gestión - Taller Mecánico");
+
+        jLabel2.setMaximumSize(new java.awt.Dimension(150, 150));
+        jLabel2.setMinimumSize(new java.awt.Dimension(150, 150));
+
+        btnRepuestos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRepuestos.setText("Gestión de Repuestos");
+        btnRepuestos.addActionListener(this::btnRepuestosActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnClientes)
+                    .addComponent(btnVehiculos)
+                    .addComponent(btnMecanicos)
+                    .addComponent(btnCategoriaRepuesto)
+                    .addComponent(btnOrdenServicio)
+                    .addComponent(btnFactura)
+                    .addComponent(btnRepuestos))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(btnClientes)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVehiculos)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnMecanicos)
+                        .addGap(19, 19, 19)
+                        .addComponent(btnRepuestos)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCategoriaRepuesto)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnOrdenServicio)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnFactura)))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+       FrmCliente ventanaFrmCliente = new FrmCliente();
+    ventanaFrmCliente.setVisible(true);
+    ventanaFrmCliente.setLocationRelativeTo(null); // TODO add your handling code here:
+    }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculosActionPerformed
+FrmVehiculos ventana = new FrmVehiculos();
+    ventana.setVisible(true);
+    ventana.setLocationRelativeTo(null);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVehiculosActionPerformed
+
+    private void btnMecanicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMecanicosActionPerformed
+FrmMecanicos ventanaMecanicos = new FrmMecanicos();
+ventanaMecanicos.setVisible(true);
+ventanaMecanicos.setLocationRelativeTo(null);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMecanicosActionPerformed
+
+    private void btnCategoriaRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaRepuestoActionPerformed
+FrmCategoriaRepuesto ventanaCategoriaRepuesto = new FrmCategoriaRepuesto();
+ventanaCategoriaRepuesto.setVisible(true);
+ventanaCategoriaRepuesto.setLocationRelativeTo(null);// TODO add your handling code here:
+    }//GEN-LAST:event_btnCategoriaRepuestoActionPerformed
+
+    private void btnOrdenServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenServicioActionPerformed
+FrmOrdenServicio ventanaOrdenServicio = new FrmOrdenServicio();
+ventanaOrdenServicio.setVisible(true);
+ventanaOrdenServicio.setLocationRelativeTo(null);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnOrdenServicioActionPerformed
+
+    private void btnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaActionPerformed
+FrmFactura ventanaFactura = new FrmFactura();
+ventanaFactura.setVisible(true);
+ventanaFactura.setLocationRelativeTo(null);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFacturaActionPerformed
+
+    private void btnRepuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepuestosActionPerformed
+         FrmRepuestos ventanaRepuestos = new FrmRepuestos();
+ventanaRepuestos.setVisible(true);
+ventanaRepuestos.setLocationRelativeTo(null);      // TODO add your handling code here:
+    }//GEN-LAST:event_btnRepuestosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +200,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCategoriaRepuesto;
+    private javax.swing.JButton btnClientes;
+    private javax.swing.JButton btnFactura;
+    private javax.swing.JButton btnMecanicos;
+    private javax.swing.JButton btnOrdenServicio;
+    private javax.swing.JButton btnRepuestos;
+    private javax.swing.JButton btnVehiculos;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

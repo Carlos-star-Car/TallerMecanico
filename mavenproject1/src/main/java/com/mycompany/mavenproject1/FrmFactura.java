@@ -17,7 +17,7 @@ public class FrmFactura extends javax.swing.JFrame {
      */
     public FrmFactura() {
         initComponents();
-            this.setSize(700, 500); // Tamaño unificado
+            this.setSize(900, 700); // Tamaño unificado
     this.setLocationRelativeTo(null); // Centrar en pantalla
     this.setResizable(false); // Evita que se redimensione
     }
@@ -31,14 +31,14 @@ public class FrmFactura extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnVolver = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDetalleFactura = new javax.swing.JTable();
         btnNombreCliente1 = new javax.swing.JLabel();
-        btnGuardar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblDetalleFactura = new javax.swing.JTable();
+        btnVolver = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         AgregarDetalle = new javax.swing.JPanel();
         lblConcepto = new javax.swing.JLabel();
         lblCantidad = new javax.swing.JLabel();
@@ -65,34 +65,9 @@ public class FrmFactura extends javax.swing.JFrame {
         txtTotal2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1210, 1200));
-        setSize(new java.awt.Dimension(1200, 1200));
-
-        btnVolver.setBackground(new java.awt.Color(100, 205, 255));
-        btnVolver.setText("MENU PRINCIPAL");
-        btnVolver.setAlignmentX(0.5F);
-        btnVolver.setPreferredSize(new java.awt.Dimension(125, 20));
-        btnVolver.addActionListener(this::btnVolverActionPerformed);
-
-        btnNombreCliente1.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        btnNombreCliente1.setText("FACTURACIÓN");
-
-        btnGuardar.setText("Guardar");
-        btnGuardar.setMaximumSize(new java.awt.Dimension(80, 23));
-        btnGuardar.setMinimumSize(new java.awt.Dimension(80, 23));
-        btnGuardar.setPreferredSize(new java.awt.Dimension(80, 23));
-
-        btnModificar.setText("Modificar");
-
-        btnLimpiar.setText("Limpiar");
-        btnLimpiar.setMaximumSize(new java.awt.Dimension(80, 23));
-        btnLimpiar.setMinimumSize(new java.awt.Dimension(80, 23));
-        btnLimpiar.setPreferredSize(new java.awt.Dimension(80, 23));
-
-        btnEliminar.setText("Eliminar");
-        btnEliminar.setMaximumSize(new java.awt.Dimension(80, 23));
-        btnEliminar.setMinimumSize(new java.awt.Dimension(80, 23));
-        btnEliminar.setPreferredSize(new java.awt.Dimension(80, 23));
+        setPreferredSize(new java.awt.Dimension(1024, 768));
+        setResizable(false);
+        setSize(new java.awt.Dimension(1024, 768));
 
         tblDetalleFactura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,12 +82,48 @@ public class FrmFactura extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblDetalleFactura);
 
+        btnNombreCliente1.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        btnNombreCliente1.setText("FACTURACIÓN");
+
+        btnModificar.setText("Modificar");
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnLimpiar.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnLimpiar.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnEliminar.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnEliminar.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        btnVolver.setBackground(new java.awt.Color(100, 205, 255));
+        btnVolver.setText("MENU PRINCIPAL");
+        btnVolver.setAlignmentX(0.5F);
+        btnVolver.setPreferredSize(new java.awt.Dimension(125, 20));
+        btnVolver.addActionListener(this::btnVolverActionPerformed);
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnGuardar.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnGuardar.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        AgregarDetalle.setPreferredSize(new java.awt.Dimension(300, 160));
+
         lblConcepto.setText("Concepto:");
 
         lblCantidad.setText("Cantidad:");
 
         lblPrecioUnitario.setText("Precio unitario");
 
+        txtConcepto.setMinimumSize(new java.awt.Dimension(64, 20));
+        txtConcepto.setPreferredSize(new java.awt.Dimension(64, 20));
+
+        txtCantidad.setMinimumSize(new java.awt.Dimension(64, 20));
+        txtCantidad.setPreferredSize(new java.awt.Dimension(64, 20));
+
+        txtPrecioUnitario.setMinimumSize(new java.awt.Dimension(64, 20));
+        txtPrecioUnitario.setPreferredSize(new java.awt.Dimension(64, 20));
         txtPrecioUnitario.addActionListener(this::txtPrecioUnitarioActionPerformed);
 
         btnLimpiarDerFact.setText("Limpiar detalle");
@@ -150,25 +161,24 @@ public class FrmFactura extends javax.swing.JFrame {
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtConcepto, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                    .addComponent(txtCantidad)
-                    .addComponent(txtPrecioUnitario)))
+                    .addComponent(txtCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPrecioUnitario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(AgregarDetalleLayout.createSequentialGroup()
                 .addGroup(AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AgregarDetalleLayout.createSequentialGroup()
                         .addComponent(btnAgregarADetFact, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AgregarDetalleLayout.createSequentialGroup()
                         .addComponent(btnLimpiarDerFact, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnModDetFact, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         AgregarDetalleLayout.setVerticalGroup(
             AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AgregarDetalleLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblConcepto)
                     .addComponent(txtConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -187,23 +197,41 @@ public class FrmFactura extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(AgregarDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarADetFact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(300, 175));
+
         lblCodFactura.setText("Código factura");
+
+        txtCodFactura.setMinimumSize(new java.awt.Dimension(64, 20));
+        txtCodFactura.setPreferredSize(new java.awt.Dimension(64, 20));
 
         lblCodigoOrden.setText("Código de orden");
 
         jCBCodOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBCodOrden.setMinimumSize(new java.awt.Dimension(72, 20));
+        jCBCodOrden.setPreferredSize(new java.awt.Dimension(72, 20));
 
-        lblFeEmision.setText("Fecha de emisión dd/MM/YY");
+        lblFeEmision.setText("Fecha de emisión");
+
+        txtFeEmision1.setMinimumSize(new java.awt.Dimension(64, 20));
+        txtFeEmision1.setPreferredSize(new java.awt.Dimension(64, 20));
 
         lblSubtotal.setText("Subtotal");
 
+        txtSubtotal1.setMinimumSize(new java.awt.Dimension(64, 20));
+        txtSubtotal1.setPreferredSize(new java.awt.Dimension(64, 20));
+
         btnTotal1.setText("Dirección");
 
+        txtTotal1.setMinimumSize(new java.awt.Dimension(64, 20));
+        txtTotal1.setPreferredSize(new java.awt.Dimension(64, 20));
+
         btnTotal2.setText("Total");
+
+        txtTotal2.setMinimumSize(new java.awt.Dimension(64, 20));
+        txtTotal2.setPreferredSize(new java.awt.Dimension(64, 20));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -222,16 +250,16 @@ public class FrmFactura extends javax.swing.JFrame {
                         .addComponent(jCBCodOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblFeEmision)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtFeEmision1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnTotal1)
                         .addGap(100, 100, 100)
-                        .addComponent(txtTotal1))
+                        .addComponent(txtTotal1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblSubtotal)
                         .addGap(104, 104, 104)
-                        .addComponent(txtSubtotal1))
+                        .addComponent(txtSubtotal1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnTotal2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -241,7 +269,7 @@ public class FrmFactura extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodFactura)
                     .addComponent(txtCodFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -264,8 +292,7 @@ public class FrmFactura extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTotal2)
-                    .addComponent(txtTotal2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtTotal2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -276,37 +303,45 @@ public class FrmFactura extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnModificar))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnModificar))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(AgregarDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(AgregarDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(277, 277, 277)
+                        .addGap(238, 238, 238)
                         .addComponent(btnNombreCliente1)))
-                .addGap(0, 562, Short.MAX_VALUE))
+                .addGap(0, 178, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(btnNombreCliente1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(AgregarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(AgregarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnModificar))
@@ -314,25 +349,26 @@ public class FrmFactura extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(550, Short.MAX_VALUE))
+                            .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-// Creamos y mostramos nuevamente el menú principal
-    FrmMenuPrincipal menu = new FrmMenuPrincipal();
-    menu.setVisible(true);
-    menu.setLocationRelativeTo(null);
-    
-    // Cerramos la ventana actual de clientes
-    this.dispose();        // TODO add your handling code here:
+        // Creamos y mostramos nuevamente el menú principal
+        FrmMenuPrincipal menu = new FrmMenuPrincipal();
+        menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
+
+        // Cerramos la ventana actual de clientes
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void txtPrecioUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioUnitarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioUnitarioActionPerformed
 
     private void btnAgregarADetFactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarADetFactActionPerformed
         // TODO add your handling code here:
@@ -341,10 +377,6 @@ public class FrmFactura extends javax.swing.JFrame {
     private void btnModDetFactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModDetFactActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnModDetFactActionPerformed
-
-    private void txtPrecioUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioUnitarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioUnitarioActionPerformed
 
     /**
      * @param args the command line arguments

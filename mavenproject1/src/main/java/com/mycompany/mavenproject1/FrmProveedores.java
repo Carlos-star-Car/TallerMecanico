@@ -17,6 +17,9 @@ public class FrmProveedores extends javax.swing.JFrame {
      */
     public FrmProveedores() {
         initComponents();
+            this.setSize(900, 700); // Tamaño unificado
+    this.setLocationRelativeTo(null); // Centrar en pantalla
+    this.setResizable(false); // Evita que se redimensione
     }
 
     /**
@@ -28,21 +31,173 @@ public class FrmProveedores extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblDireccEmpresa = new javax.swing.JLabel();
+        btnNombreCliente1 = new javax.swing.JLabel();
+        lbltelEmpresa = new javax.swing.JLabel();
+        btnlimpiar = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        lblNombEmpresa = new javax.swing.JLabel();
+        lblCodProveedor = new javax.swing.JLabel();
+        txtCodProveedor = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
+        txtCorreoEmpresa = new javax.swing.JTextField();
+        lblNombContacto = new javax.swing.JLabel();
+        btnModificar = new javax.swing.JButton();
+        lblCorreoEmpresa = new javax.swing.JLabel();
+        txtNombContacto = new javax.swing.JTextField();
+        txtNombEmpresa = new javax.swing.JTextField();
+        txtDireccEmpresa = new javax.swing.JTextField();
+        txtTelEmpresa = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblDireccEmpresa.setText("Dirección");
+
+        btnNombreCliente1.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        btnNombreCliente1.setText("PROVEEDORES");
+
+        lbltelEmpresa.setText("Teléfono contacto/empresa");
+
+        btnlimpiar.setText("Limpiar");
+        btnlimpiar.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnlimpiar.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnlimpiar.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        btnVolver.setBackground(new java.awt.Color(100, 205, 255));
+        btnVolver.setText("MENU PRINCIPAL");
+        btnVolver.setAlignmentX(0.5F);
+        btnVolver.setMaximumSize(new java.awt.Dimension(125, 20));
+        btnVolver.setMinimumSize(new java.awt.Dimension(120, 20));
+        btnVolver.setPreferredSize(new java.awt.Dimension(125, 20));
+        btnVolver.addActionListener(this::btnVolverActionPerformed);
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnEliminar.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnEliminar.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        lblNombEmpresa.setText("Nombre empresa");
+
+        lblCodProveedor.setText("Código proveedor");
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnGuardar.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnGuardar.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        lblNombContacto.setText("Nombre contacto");
+
+        btnModificar.setText("Modificar");
+
+        lblCorreoEmpresa.setText("Correo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnlimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnModificar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(116, 116, 116)
+                                .addComponent(btnNombreCliente1))
+                            .addComponent(lblCorreoEmpresa))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblDireccEmpresa)
+                                .addGap(114, 114, 114)
+                                .addComponent(txtDireccEmpresa))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNombContacto)
+                                    .addComponent(lbltelEmpresa)
+                                    .addComponent(lblNombEmpresa)
+                                    .addComponent(lblCodProveedor))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombContacto)
+                                    .addComponent(txtNombEmpresa)
+                                    .addComponent(txtCodProveedor)
+                                    .addComponent(txtCorreoEmpresa)
+                                    .addComponent(txtTelEmpresa))))
+                        .addGap(61, 61, 61))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(btnNombreCliente1)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCodProveedor)
+                    .addComponent(txtCodProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombEmpresa)
+                    .addComponent(txtNombEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombContacto)
+                    .addComponent(txtNombContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(lbltelEmpresa))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTelEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCorreoEmpresa)
+                    .addComponent(txtCorreoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDireccEmpresa)
+                    .addComponent(txtDireccEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnlimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        FrmMenuPrincipal menu = new FrmMenuPrincipal();
+        menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
+
+        // Cerramos la ventana actual de clientes
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +225,23 @@ public class FrmProveedores extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JLabel btnNombreCliente1;
+    private javax.swing.JButton btnVolver;
+    private javax.swing.JButton btnlimpiar;
+    private javax.swing.JLabel lblCodProveedor;
+    private javax.swing.JLabel lblCorreoEmpresa;
+    private javax.swing.JLabel lblDireccEmpresa;
+    private javax.swing.JLabel lblNombContacto;
+    private javax.swing.JLabel lblNombEmpresa;
+    private javax.swing.JLabel lbltelEmpresa;
+    private javax.swing.JTextField txtCodProveedor;
+    private javax.swing.JTextField txtCorreoEmpresa;
+    private javax.swing.JTextField txtDireccEmpresa;
+    private javax.swing.JTextField txtNombContacto;
+    private javax.swing.JTextField txtNombEmpresa;
+    private javax.swing.JTextField txtTelEmpresa;
     // End of variables declaration//GEN-END:variables
 }
