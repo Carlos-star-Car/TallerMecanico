@@ -1,89 +1,151 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-
-
-/**
- *
- * @author cxoy
- */
 package com.mycompany.mavenproject1.Servicios;
 
+import com.mycompany.mavenproject1.Conexion.ConexionBD;
 import com.mycompany.mavenproject1.Entidades.Cliente;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+/**
+ * Servicio de clientes con almacenamiento en MySQL (tabla cliente).
+ * Mantiene los mismos metodos que la version en memoria.
+ */
 public class ClienteServicio {
-      // Instancia única compartida por todos los formularios
+
+    private static final Logger LOG = Logger.getLogger(ClienteServicio.class.getName());
+
+    // Instancia unica compartida por todos los formularios
     private static final ClienteServicio INSTANCIA = new ClienteServicio();
 
     public static ClienteServicio getInstancia() {
         return INSTANCIA;
     }
-    private final List<Cliente> clientes = new ArrayList<>();
 
-    // Guarda un cliente nuevo. Devuelve false si el código ya existe.
+    private static final String COLUMNAS = "codigo, nombre, apellido, nit, telefono, direccion, correo";
+
+    // Guarda un cliente nuevo. Devuelve false si el codigo ya existe o hay un error.
     public boolean guardar(Cliente cliente) {
         if (buscarPorCodigo(cliente.getCodigo()) != null) {
             return false;
         }
-        clientes.add(cliente);
-        return true;
+        String sql = "INSERT INTO cliente (" + COLUMNAS + ") VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection cn = ConexionBD.obtener();
+             PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setString(1, cliente.getCodigo());
+            ps.setString(2, cliente.getNombre());
+            ps.setString(3, cliente.getApellido());
+            ps.setString(4, cliente.getNit());
+            ps.setString(5, cliente.getTelefono());
+            ps.setString(6, cliente.getDireccion());
+            ps.setString(7, cliente.getCorreo());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, "No se pudo guardar el cliente", ex);
+            return false;
+        }
     }
 
-    // Actualiza los datos de un cliente existente (el código no cambia).
+    // Actualiza los datos de un cliente existente (el codigo no cambia).
     public boolean modificar(Cliente cliente) {
-        Cliente existente = buscarPorCodigo(cliente.getCodigo());
-        if (existente == null) {
+        String sql = "UPDATE cliente SET nombre = ?, apellido = ?, nit = ?, telefono = ?, "
+                + "direccion = ?, correo = ? WHERE codigo = ?";
+        try (Connection cn = ConexionBD.obtener();
+             PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setString(1, cliente.getNombre());
+            ps.setString(2, cliente.getApellido());
+            ps.setString(3, cliente.getNit());
+            ps.setString(4, cliente.getTelefono());
+            ps.setString(5, cliente.getDireccion());
+            ps.setString(6, cliente.getCorreo());
+            ps.setString(7, cliente.getCodigo());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, "No se pudo modificar el cliente", ex);
             return false;
         }
-        existente.setNombre(cliente.getNombre());
-        existente.setApellido(cliente.getApellido());
-        existente.setNit(cliente.getNit());
-        existente.setTelefono(cliente.getTelefono());
-        existente.setDireccion(cliente.getDireccion());
-        existente.setCorreo(cliente.getCorreo());
-        return true;
     }
 
-    // Elimina un cliente por código. Devuelve false si no existe.
+    // Elimina un cliente por codigo. Devuelve false si no existe o si tiene
+    // vehiculos, ordenes o facturas asociadas (la base de datos lo impide).
     public boolean eliminar(String codigo) {
-        Cliente existente = buscarPorCodigo(codigo);
-        if (existente == null) {
+        String sql = "DELETE FROM cliente WHERE codigo = ?";
+        try (Connection cn = ConexionBD.obtener();
+             PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setString(1, codigo);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, "No se pudo eliminar el cliente", ex);
             return false;
         }
-        clientes.remove(existente);
-        return true;
     }
 
-    // Busca por código exacto (ignora mayúsculas).
+    // Busca por codigo exacto (ignora mayusculas). Devuelve null si no existe.
     public Cliente buscarPorCodigo(String codigo) {
-        for (Cliente c : clientes) {
-            if (c.getCodigo().equalsIgnoreCase(codigo)) {
-                return c;
+        String sql = "SELECT " + COLUMNAS + " FROM cliente WHERE codigo = ?";
+        try (Connection cn = ConexionBD.obtener();
+             PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setString(1, codigo);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? mapear(rs) : null;
             }
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, "No se pudo buscar el cliente", ex);
+            return null;
         }
-        return null;
     }
 
-    // Busca clientes cuyo código sea exacto o cuyo nombre contenga el texto.
+    // Busca clientes cuyo codigo sea exacto o cuyo nombre contenga el texto.
     public List<Cliente> buscar(String codigo, String nombre) {
         List<Cliente> resultado = new ArrayList<>();
-        for (Cliente c : clientes) {
-            boolean porCodigo = !codigo.isEmpty() && c.getCodigo().equalsIgnoreCase(codigo);
-            boolean porNombre = !nombre.isEmpty()
-                    && c.getNombre().toLowerCase().contains(nombre.toLowerCase());
-            if (porCodigo || porNombre) {
-                resultado.add(c);
+        String sql = "SELECT " + COLUMNAS + " FROM cliente "
+                + "WHERE (? <> '' AND codigo = ?) OR (? <> '' AND nombre LIKE ?) "
+                + "ORDER BY codigo";
+        try (Connection cn = ConexionBD.obtener();
+             PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setString(1, codigo);
+            ps.setString(2, codigo);
+            ps.setString(3, nombre);
+            ps.setString(4, "%" + nombre + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    resultado.add(mapear(rs));
+                }
             }
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, "No se pudo buscar clientes", ex);
         }
         return resultado;
     }
 
     // Devuelve todos los clientes.
     public List<Cliente> listar() {
-        return new ArrayList<>(clientes);
+        List<Cliente> resultado = new ArrayList<>();
+        String sql = "SELECT " + COLUMNAS + " FROM cliente ORDER BY codigo";
+        try (Connection cn = ConexionBD.obtener();
+             PreparedStatement ps = cn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                resultado.add(mapear(rs));
+            }
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, "No se pudo listar los clientes", ex);
+        }
+        return resultado;
+    }
+
+    private Cliente mapear(ResultSet rs) throws SQLException {
+        return new Cliente(
+                rs.getString("codigo"),
+                rs.getString("nombre"),
+                rs.getString("apellido"),
+                rs.getString("nit"),
+                rs.getString("telefono"),
+                rs.getString("direccion"),
+                rs.getString("correo"));
     }
 }
