@@ -396,14 +396,16 @@ private void aviso(String msg) {
             "¿Desea eliminar la categoría " + nombre + " (código " + codigo + ")?",
             "Confirmar eliminación", javax.swing.JOptionPane.YES_NO_OPTION);
 
-    if (servicio.eliminar(codigo)) {
-    actualizarTabla();
-    limpiarCampos();
-    javax.swing.JOptionPane.showMessageDialog(this, "Categoría eliminada.");
-} else {
-    javax.swing.JOptionPane.showMessageDialog(this,
-            "No se pudo eliminar la categoría. Verifique que ningún repuesto la esté usando.");
-}
+    if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+        if (servicio.eliminar(codigo)) {
+            actualizarTabla();
+            limpiarCampos();
+            javax.swing.JOptionPane.showMessageDialog(this, "Categoría eliminada.");
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "No se pudo eliminar la categoría. Verifique que ningún repuesto la esté usando.");
+        }
+    }
        // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarActionPerformed
 

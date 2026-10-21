@@ -429,14 +429,16 @@ limpiarCampos();
             javax.swing.JOptionPane.YES_NO_OPTION,
             javax.swing.JOptionPane.QUESTION_MESSAGE);
 
-  if (servicio.eliminar(codigo)) {
-    javax.swing.JOptionPane.showMessageDialog(this, "Proveedor eliminado.");
-    actualizarTabla();
-    limpiarCampos();
-} else {
-    javax.swing.JOptionPane.showMessageDialog(this,
-            "No se pudo eliminar el proveedor. Verifique que ningún repuesto lo esté usando.");
-}
+    if (opcion == javax.swing.JOptionPane.YES_OPTION) {
+        if (servicio.eliminar(codigo)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Proveedor eliminado.");
+            actualizarTabla();
+            limpiarCampos();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "No se pudo eliminar el proveedor. Verifique que ningún repuesto lo esté usando.");
+        }
+    }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarActionPerformed
 

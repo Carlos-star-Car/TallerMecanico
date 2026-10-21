@@ -420,14 +420,16 @@ private void limpiarCampos() {
             "Confirmar eliminación",
             javax.swing.JOptionPane.YES_NO_OPTION);
 
-    if (servicio.eliminar(codigo)) {
-    actualizarTabla();
-    limpiarCampos();
-    javax.swing.JOptionPane.showMessageDialog(this, "Cliente eliminado.");
-} else {
-    javax.swing.JOptionPane.showMessageDialog(this,
-            "No se pudo eliminar el cliente. Verifique que no tenga vehículos, órdenes o facturas.");
-}
+    if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+        if (servicio.eliminar(codigo)) {
+            actualizarTabla();
+            limpiarCampos();
+            javax.swing.JOptionPane.showMessageDialog(this, "Cliente eliminado.");
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "No se pudo eliminar el cliente. Verifique que no tenga vehículos, órdenes o facturas.");
+        }
+    }
        // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarActionPerformed
 
