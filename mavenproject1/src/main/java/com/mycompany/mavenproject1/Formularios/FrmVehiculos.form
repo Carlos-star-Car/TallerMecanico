@@ -117,13 +117,14 @@
                                   <Component id="lblCodCliente" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtModelo" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                                  <Component id="jCBCodigoCliente" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                                  <Component id="txtPlaca" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                                  <Component id="txtColor" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                                  <Component id="txtMarca" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                                  <Component id="txtTipo" min="-2" pref="170" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtModelo" alignment="0" pref="170" max="32767" attributes="0"/>
+                                  <Component id="jCBCodigoCliente" alignment="0" pref="170" max="32767" attributes="0"/>
+                                  <Component id="txtPlaca" alignment="0" pref="170" max="32767" attributes="0"/>
+                                  <Component id="txtColor" alignment="0" pref="170" max="32767" attributes="0"/>
+                                  <Component id="txtMarca" alignment="0" pref="170" max="32767" attributes="0"/>
+                                  <Component id="txtTipo" pref="170" max="32767" attributes="0"/>
+                                  <Component id="lblNombreCliente" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -167,8 +168,14 @@
                       <Component id="lblCodCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jCBCodigoCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="21" max="32767" attributes="0"/>
-                  <Component id="btnBuscar" min="-2" pref="23" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
+                          <Component id="btnBuscar" min="-2" pref="23" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="lblNombreCliente" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
@@ -390,6 +397,11 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblNombreCliente">
+          <Properties>
+            <Property name="requestFocusEnabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

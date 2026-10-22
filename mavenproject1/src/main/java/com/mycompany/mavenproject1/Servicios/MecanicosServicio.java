@@ -1,82 +1,136 @@
 package com.mycompany.mavenproject1.Servicios;
 
+import com.mycompany.mavenproject1.Conexion.ConexionBD;
 import com.mycompany.mavenproject1.Entidades.Mecanicos;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+/**
+ * Servicio de mecanicos con almacenamiento en MySQL (tabla mecanico).
+ * Mantiene los mismos metodos que la version en memoria.
+ */
 public class MecanicosServicio {
- private static final List<Mecanicos> mecanicos = new ArrayList<>();
-     private int contador = 1;
 
-    // Código que tendrá la próxima orden (para mostrarlo en el formulario).
-    public String siguienteCodigo() {
-        return String.format("OT-%03d", contador);
-    }
+    private static final Logger LOG = Logger.getLogger(MecanicosServicio.class.getName());
 
-    // Entrega el código y avanza el contador. Se llama solo al guardar.
-    public String nuevoCodigo() {
-        return String.format("OT-%03d", contador++);
-    }
+    private static final String COLUMNAS = "codigo, nombre, apellido, telefono, especialidad, tarifa";
 
     public boolean guardar(Mecanicos mecanico) {
         if (buscarPorCodigo(mecanico.getCodigo()) != null) {
             return false;
         }
-        mecanicos.add(mecanico);
-        return true;
+        String sql = "INSERT INTO mecanico (" + COLUMNAS + ") VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection cn = ConexionBD.obtener();
+             PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setInt(1, mecanico.getCodigo());
+            ps.setString(2, mecanico.getNombre());
+            ps.setString(3, mecanico.getApellido());
+            ps.setString(4, mecanico.getTelefono());
+            ps.setString(5, mecanico.getEspecialidad());
+            ps.setDouble(6, mecanico.getTarifa());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, "No se pudo guardar el mecanico", ex);
+            return false;
+        }
     }
 
     public boolean modificar(Mecanicos mecanico) {
-        Mecanicos existente = buscarPorCodigo(mecanico.getCodigo());
-        if (existente == null) {
+        String sql = "UPDATE mecanico SET nombre = ?, apellido = ?, telefono = ?, "
+                + "especialidad = ?, tarifa = ? WHERE codigo = ?";
+        try (Connection cn = ConexionBD.obtener();
+             PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setString(1, mecanico.getNombre());
+            ps.setString(2, mecanico.getApellido());
+            ps.setString(3, mecanico.getTelefono());
+            ps.setString(4, mecanico.getEspecialidad());
+            ps.setDouble(5, mecanico.getTarifa());
+            ps.setInt(6, mecanico.getCodigo());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, "No se pudo modificar el mecanico", ex);
             return false;
         }
-        existente.setNombre(mecanico.getNombre());
-        existente.setApellido(mecanico.getApellido());
-        existente.setTelefono(mecanico.getTelefono());
-        existente.setEspecialidad(mecanico.getEspecialidad());
-        existente.setTarifa(mecanico.getTarifa());
-        return true;
     }
 
+    /** Devuelve false si no existe o si tiene ordenes de trabajo asociadas. */
     public boolean eliminar(int codigo) {
-        Mecanicos existente = buscarPorCodigo(codigo);
-        if (existente == null) {
+        String sql = "DELETE FROM mecanico WHERE codigo = ?";
+        try (Connection cn = ConexionBD.obtener();
+             PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setInt(1, codigo);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, "No se pudo eliminar el mecanico", ex);
             return false;
         }
-        mecanicos.remove(existente);
-        return true;
     }
 
     public Mecanicos buscarPorCodigo(int codigo) {
-        for (Mecanicos m : mecanicos) {
-            if (m.getCodigo() == codigo) {
-                return m;
+        String sql = "SELECT " + COLUMNAS + " FROM mecanico WHERE codigo = ?";
+        try (Connection cn = ConexionBD.obtener();
+             PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setInt(1, codigo);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? mapear(rs) : null;
             }
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, "No se pudo buscar el mecanico", ex);
+            return null;
         }
-        return null;
     }
 
-    // Atajo usado por el formulario: devuelve un mecánico o null.
+    // Atajo usado por el formulario: devuelve un mecanico o null.
     public Mecanicos buscar(int codigo) {
         return buscarPorCodigo(codigo);
     }
 
-    // Código exacto (si codigo >= 0) o parte del nombre.
+    // Codigo exacto (si codigo >= 0) o parte del nombre.
     public List<Mecanicos> buscar(int codigo, String nombre) {
         List<Mecanicos> resultado = new ArrayList<>();
-        for (Mecanicos m : mecanicos) {
-            boolean porCodigo = codigo >= 0 && m.getCodigo() == codigo;
-            boolean porNombre = !nombre.isEmpty()
-                    && m.getNombre().toLowerCase().contains(nombre.toLowerCase());
-            if (porCodigo || porNombre) {
-                resultado.add(m);
+        String sql = "SELECT " + COLUMNAS + " FROM mecanico "
+                + "WHERE (? >= 0 AND codigo = ?) OR (? <> '' AND nombre LIKE ?) ORDER BY codigo";
+        try (Connection cn = ConexionBD.obtener();
+             PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setInt(1, codigo);
+            ps.setInt(2, codigo);
+            ps.setString(3, nombre);
+            ps.setString(4, "%" + nombre + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    resultado.add(mapear(rs));
+                }
             }
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, "No se pudo buscar mecanicos", ex);
         }
         return resultado;
     }
 
     public List<Mecanicos> listar() {
-        return new ArrayList<>(mecanicos);
+        List<Mecanicos> resultado = new ArrayList<>();
+        String sql = "SELECT " + COLUMNAS + " FROM mecanico ORDER BY codigo";
+        try (Connection cn = ConexionBD.obtener();
+             PreparedStatement ps = cn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                resultado.add(mapear(rs));
+            }
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, "No se pudo listar los mecanicos", ex);
+        }
+        return resultado;
+    }
+
+    private Mecanicos mapear(ResultSet rs) throws SQLException {
+        return new Mecanicos(rs.getInt("codigo"), rs.getString("nombre"),
+                rs.getString("apellido"), rs.getString("telefono"),
+                rs.getString("especialidad"), rs.getFloat("tarifa"));
     }
 }

@@ -24,13 +24,26 @@ public class FrmVehiculos extends javax.swing.JFrame {
     /**
      * Creates new form FrmVehiculos
      */
-    public FrmVehiculos() {
-        initComponents();
-        setLocationRelativeTo(null);
-        cargarClientes();
-        actualizarTabla();
+ public FrmVehiculos() {
+    initComponents();
+    setLocationRelativeTo(null);
+    lblNombreCliente.setFont(new java.awt.Font("Segoe UI", 0, 14));
+    lblNombreCliente.setOpaque(true);
+    lblNombreCliente.setBackground(java.awt.Color.WHITE);
+    lblNombreCliente.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.GRAY));
+    jCBCodigoCliente.addActionListener(e -> mostrarNombreCliente());
+    cargarClientes();
+    actualizarTabla();
+}
+private void mostrarNombreCliente() {
+    Object seleccion = jCBCodigoCliente.getSelectedItem();
+    if (seleccion == null) {
+        lblNombreCliente.setText("");
+        return;
     }
-
+    Cliente c = clienteServicio.buscarPorCodigo(seleccion.toString());
+    lblNombreCliente.setText(c == null ? "" : " " + c.getNombreCompleto());
+}
     private void cargarClientes() {
         jCBCodigoCliente.removeAllItems();
         for (Cliente c : clienteServicio.listar()) {
@@ -101,6 +114,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
         txtMarca = new javax.swing.JTextField();
         txtTipo = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        lblNombreCliente = new javax.swing.JLabel();
         lbllogo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -180,6 +194,8 @@ public class FrmVehiculos extends javax.swing.JFrame {
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
+        lblNombreCliente.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -208,13 +224,14 @@ public class FrmVehiculos extends javax.swing.JFrame {
                                 .addComponent(lblColor)
                                 .addComponent(lblCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(78, 78, 78)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jCBCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                .addComponent(jCBCodigoCliente, 0, 170, Short.MAX_VALUE)
+                                .addComponent(txtPlaca, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                .addComponent(txtColor, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                .addComponent(txtMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                .addComponent(txtTipo, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                .addComponent(lblNombreCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addComponent(lblMarca)
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(37, Short.MAX_VALUE))
@@ -246,8 +263,12 @@ public class FrmVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodCliente)
                     .addComponent(jCBCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 9, Short.MAX_VALUE)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNombreCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -516,6 +537,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
     private javax.swing.JLabel lblColor;
     private javax.swing.JLabel lblMarca;
     private javax.swing.JLabel lblModelo;
+    private javax.swing.JLabel lblNombreCliente;
     private javax.swing.JLabel lblPlaca;
     private javax.swing.JLabel lblTipoVehiculo;
     private javax.swing.JLabel lbllogo;

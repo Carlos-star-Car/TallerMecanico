@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.mavenproject1.Formularios;
-
+ 
 import com.mycompany.mavenproject1.Entidades.CategoriaRepuesto;
 import com.mycompany.mavenproject1.Entidades.Proveedores;
 import com.mycompany.mavenproject1.Entidades.Repuesto;
