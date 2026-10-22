@@ -19,8 +19,8 @@ import java.time.format.DateTimeFormatter;
  * @author cxoy
  */
 public class FrmOrdenDeTrabajo extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmOrdenDeTrabajo.class.getName());
+   
+private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmOrdenDeTrabajo.class.getName());
     private final OrdenDeTrabajoServicio servicio = OrdenDeTrabajoServicio.getInstancia();
     private final VehiculoServicio vehiculoServicio = new VehiculoServicio();
     private final MecanicosServicio mecanicosServicio = new MecanicosServicio();
@@ -29,7 +29,7 @@ public class FrmOrdenDeTrabajo extends javax.swing.JFrame {
     private boolean modoModificar = false;
     private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public FrmOrdenDeTrabajo() {
+     public FrmOrdenDeTrabajo() {
         initComponents();
         this.setSize(900, 700);
         this.setLocationRelativeTo(null);
@@ -64,7 +64,7 @@ public class FrmOrdenDeTrabajo extends javax.swing.JFrame {
         lblPlaca = new javax.swing.JLabel();
         jCBMecanicos = new javax.swing.JComboBox<>();
         lblCodigoMecanico = new javax.swing.JLabel();
-        btnGuardar = new javax.swing.JButton();
+        btnGuardarOrden = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
@@ -104,10 +104,11 @@ public class FrmOrdenDeTrabajo extends javax.swing.JFrame {
         lblCodigoMecanico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCodigoMecanico.setText("Código Mecánico");
 
-        btnGuardar.setText("Guardar");
-        btnGuardar.setMaximumSize(new java.awt.Dimension(80, 23));
-        btnGuardar.setMinimumSize(new java.awt.Dimension(80, 23));
-        btnGuardar.setPreferredSize(new java.awt.Dimension(80, 23));
+        btnGuardarOrden.setText("Guardar");
+        btnGuardarOrden.setMaximumSize(new java.awt.Dimension(80, 23));
+        btnGuardarOrden.setMinimumSize(new java.awt.Dimension(80, 23));
+        btnGuardarOrden.setPreferredSize(new java.awt.Dimension(80, 23));
+        btnGuardarOrden.addActionListener(this::btnGuardarOrdenActionPerformed);
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(this::btnModificarActionPerformed);
@@ -143,7 +144,7 @@ public class FrmOrdenDeTrabajo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGuardarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -199,7 +200,7 @@ public class FrmOrdenDeTrabajo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGuardarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -284,6 +285,71 @@ public class FrmOrdenDeTrabajo extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnGuardarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarOrdenActionPerformed
+
+        String diagnostico = txtDiagnostico.getText().trim();
+        if (diagnostico.isEmpty()) {
+            aviso("Ingrese el diagnóstico.");
+            return;
+        }
+        Vehiculo v = vehiculoSeleccionado();
+        if (v == null) {
+            aviso("Seleccione la placa del vehículo.");
+            return;
+        }
+        Mecanicos m = mecanicoSeleccionado();
+        if (m == null) {
+            aviso("Seleccione el mecánico.");
+            return;
+        }
+        // El cliente sale del vehículo, así siempre coinciden.
+        Cliente c = ClienteServicio.getInstancia().buscarPorCodigo(v.getCodigoCliente());
+        if (c == null) {
+            aviso("El cliente del vehículo (código " + v.getCodigoCliente() + ") no existe.");
+            return;
+        }
+
+        if (modoModificar) {
+            OrdenDeTrabajo existente = servicio.buscarPorCodigo(txtCodigoOrden.getText());
+            if (existente == null) {
+                aviso("La orden ya no existe.");
+                limpiarFormulario();
+                return;
+            }
+            if (!existente.estaPendiente()) {
+                aviso("No se puede modificar una orden ya facturada.");
+                return;
+            }
+
+            // Leer y convertir la fecha del campo de texto de forma segura
+            LocalDate fechaModificada;
+            try {
+                fechaModificada = LocalDate.parse(txtFechaDeIngreso.getText().trim(), FORMATO_FECHA);
+            } catch (Exception e) {
+                aviso("Formato de fecha inválido. Utilice el formato dd/MM/yyyy.");
+                return;
+            }
+
+            OrdenDeTrabajo nueva = new OrdenDeTrabajo(existente.getCodigo(), c, fechaModificada, diagnostico);
+            nueva.setVehiculo(v);
+            nueva.setMecanico(m);
+            nueva.setEstado(existente.getEstado());
+            servicio.modificar(nueva);
+            aviso("Orden modificada.");
+        } else {
+            String codigo = servicio.nuevoCodigo();
+            OrdenDeTrabajo o = new OrdenDeTrabajo(codigo, c, LocalDate.now(), diagnostico);
+            o.setVehiculo(v);
+            o.setMecanico(m);
+            servicio.guardar(o);
+            aviso("Orden " + codigo + " guardada.");
+        }
+        actualizarTabla();
+        limpiarFormulario();
+           
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarOrdenActionPerformed
   private void cargarImagenlogo() {
     java.net.URL url = getClass().getResource("/logotaller.png");
     if (url == null) {
@@ -298,12 +364,11 @@ public class FrmOrdenDeTrabajo extends javax.swing.JFrame {
 }
       // ---------- Configuración ----------
 
-    private void configurarFormulario() {
+ private void configurarFormulario() {
         txtCodigoOrden.setEditable(false);
-        txtFechaDeIngreso.setEditable(false);
         txtEstado.setEditable(false);
 
-        btnGuardar.addActionListener(e -> guardarOrden());
+        // Eliminamos la línea duplicada de guardarOrden() porque initComponents ya enlaza btnGuardarOrdenActionPerformed
         btnModificar.addActionListener(e -> cargarOrdenSeleccionada());
         btnEliminar.addActionListener(e -> eliminarOrden());
         btnLimpiar.addActionListener(e -> limpiarFormulario());
@@ -367,57 +432,6 @@ public class FrmOrdenDeTrabajo extends javax.swing.JFrame {
 
     // ---------- Guardar, Modificar, Eliminar, Limpiar ----------
 
-    private void guardarOrden() {
-        String diagnostico = txtDiagnostico.getText().trim();
-        if (diagnostico.isEmpty()) {
-            aviso("Ingrese el diagnóstico.");
-            return;
-        }
-        Vehiculo v = vehiculoSeleccionado();
-        if (v == null) {
-            aviso("Seleccione la placa del vehículo.");
-            return;
-        }
-        Mecanicos m = mecanicoSeleccionado();
-        if (m == null) {
-            aviso("Seleccione el mecánico.");
-            return;
-        }
-        // El cliente sale del vehículo, así siempre coinciden.
-        Cliente c = ClienteServicio.getInstancia().buscarPorCodigo(v.getCodigoCliente());
-        if (c == null) {
-            aviso("El cliente del vehículo (código " + v.getCodigoCliente() + ") no existe.");
-            return;
-        }
-
-        if (modoModificar) {
-            OrdenDeTrabajo existente = servicio.buscarPorCodigo(txtCodigoOrden.getText());
-            if (existente == null) {
-                aviso("La orden ya no existe.");
-                limpiarFormulario();
-                return;
-            }
-            if (!existente.estaPendiente()) {
-                aviso("No se puede modificar una orden ya facturada.");
-                return;
-            }
-            OrdenDeTrabajo nueva = new OrdenDeTrabajo(existente.getCodigo(), c, existente.getFecha(), diagnostico);
-            nueva.setVehiculo(v);
-            nueva.setMecanico(m);
-            nueva.setEstado(existente.getEstado());
-            servicio.modificar(nueva);
-            aviso("Orden modificada.");
-        } else {
-            String codigo = servicio.nuevoCodigo();
-            OrdenDeTrabajo o = new OrdenDeTrabajo(codigo, c, LocalDate.now(), diagnostico);
-            o.setVehiculo(v);
-            o.setMecanico(m);
-            servicio.guardar(o);
-            aviso("Orden " + codigo + " guardada.");
-        }
-        actualizarTabla();
-        limpiarFormulario();
-    }
 
     // "Modificar": pasa la orden seleccionada en la tabla a los campos para editarla.
     private void cargarOrdenSeleccionada() {
@@ -525,7 +539,7 @@ public class FrmOrdenDeTrabajo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnGuardarOrden;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JLabel btnNombreCliente1;

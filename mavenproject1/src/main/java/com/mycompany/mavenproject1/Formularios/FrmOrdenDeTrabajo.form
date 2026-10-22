@@ -83,7 +83,7 @@
                           <Component id="btnLimpiar" min="-2" pref="87" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnGuardar" min="-2" pref="87" max="-2" attributes="0"/>
+                          <Component id="btnGuardarOrden" min="-2" pref="87" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnModificar" min="-2" pref="87" max="-2" attributes="0"/>
                       </Group>
@@ -152,7 +152,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnGuardar" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="btnGuardarOrden" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                               <Component id="btnModificar" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -262,7 +262,7 @@
             <Property name="text" type="java.lang.String" value="C&#xf3;digo Mec&#xe1;nico"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnGuardar">
+        <Component class="javax.swing.JButton" name="btnGuardarOrden">
           <Properties>
             <Property name="text" type="java.lang.String" value="Guardar"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -275,6 +275,9 @@
               <Dimension value="[80, 23]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarOrdenActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnModificar">
           <Properties>

@@ -132,11 +132,7 @@ public class FacturaServicio {
         }
         f.setEstado(Factura.ESTADO_ANULADA);
         if (f.getIdOrden() != null) {
-            OrdenDeTrabajo orden = OrdenDeTrabajoServicio.getInstancia()
-                    .buscarPorCodigo(f.getIdOrden());
-            if (orden != null) {
-                orden.setEstado(OrdenDeTrabajo.ESTADO_PENDIENTE);
-            }
+            OrdenDeTrabajoServicio.getInstancia().marcarComoPendiente(f.getIdOrden());
         }
         return null;
     }
