@@ -5,7 +5,7 @@
 package com.mycompany.mavenproject1.Formularios;
 
 import com.mycompany.mavenproject1.Entidades.Cliente;
-import com.mycompany.mavenproject1.Entidades.DetalleFactura;   // NUEVO
+import com.mycompany.mavenproject1.Entidades.DetalleFactura;   
 import com.mycompany.mavenproject1.Entidades.Factura;
 import com.mycompany.mavenproject1.Entidades.OrdenDeTrabajo;
 import com.mycompany.mavenproject1.Servicios.ClienteServicio;
