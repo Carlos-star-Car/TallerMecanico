@@ -598,6 +598,7 @@ btnAgregarADetalleFacturaActionPerformed(evt);
         btnBuscar.addActionListener(e -> buscarFactura());
         btnAnular.addActionListener(e -> anularFactura());
         btnLimpiar.addActionListener(e -> iniciarFormulario());
+        crearMenuDocumento();
 
         
     }
@@ -698,20 +699,28 @@ btnAgregarADetalleFacturaActionPerformed(evt);
         boolean servicio = jRBOrdenServicio.isSelected();
         boolean conOrden = servicio && CdOrdenSi.isSelected();
         boolean sinOrden = servicio && CdOrdenNo.isSelected();
+        boolean repuesto = jRBRepuesto.isSelected();
 
         CdOrdenSi.setEnabled(servicio);
         CdOrdenNo.setEnabled(servicio);
         jCBCodigoOrden.setEnabled(conOrden);
 
-        boolean datosClienteActivos = conOrden || sinOrden;
+        // La compra de un repuesto no depende de una orden: cliente y fecha se escriben a mano.
+        boolean datosClienteActivos = conOrden || sinOrden || repuesto;
         txtNombreCliente.setEnabled(datosClienteActivos);
         txtNit.setEnabled(datosClienteActivos);
         txtDireccion.setEnabled(datosClienteActivos);
 
         // Con orden se llenan solos (solo lectura); sin orden se escriben a mano.
-        txtNombreCliente.setEditable(sinOrden);
-        txtNit.setEditable(sinOrden);
-        txtDireccion.setEditable(sinOrden);
+        txtNombreCliente.setEditable(sinOrden || repuesto);
+        txtNit.setEditable(sinOrden || repuesto);
+        txtDireccion.setEditable(sinOrden || repuesto);
+
+        // La fecha solo se puede cambiar en facturas de repuesto; en servicio es la de hoy.
+        txtFechaEmision.setEditable(repuesto && !modoConsulta);
+        if (!repuesto && !modoConsulta) {
+            txtFechaEmision.setText(LocalDate.now().format(FORMATO_FECHA));
+        }
     }
         // ---------- Detalle de factura ----------
 
@@ -935,6 +944,52 @@ btnAgregarADetalleFacturaActionPerformed(evt);
     private void aviso(String mensaje) {
         javax.swing.JOptionPane.showMessageDialog(this, mensaje);
     }
+
+    // ---------- PDF e impresión (a elección del usuario) ----------
+
+    private void crearMenuDocumento() {
+        javax.swing.JMenuBar barra = new javax.swing.JMenuBar();
+        javax.swing.JMenu menu = new javax.swing.JMenu("Documento");
+        menu.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13));
+        javax.swing.JMenuItem miPdf = new javax.swing.JMenuItem("Guardar factura como PDF...");
+        javax.swing.JMenuItem miImprimir = new javax.swing.JMenuItem("Imprimir factura...");
+        miPdf.addActionListener(e -> {
+            if (hayFacturaConsultada()) {
+                com.mycompany.mavenproject1.Servicios.DocumentoPdf.guardarFactura(this, facturaConsultada);
+            }
+        });
+        miImprimir.addActionListener(e -> {
+            if (hayFacturaConsultada()) {
+                com.mycompany.mavenproject1.Servicios.DocumentoPdf.imprimirFactura(this, facturaConsultada);
+            }
+        });
+        menu.add(miPdf);
+        menu.add(miImprimir);
+        barra.add(menu);
+        setJMenuBar(barra);
+    }
+
+    private boolean hayFacturaConsultada() {
+        if (facturaConsultada == null) {
+            aviso("Primero use Buscar para consultar la factura que desea guardar o imprimir.");
+            return false;
+        }
+        return true;
+    }
+
+    /** Pregunta, a discreción del usuario, si desea guardar o imprimir la factura recién emitida. */
+    private void ofrecerDocumento(Factura f) {
+        Object[] opciones = {"Guardar PDF", "Imprimir", "Ahora no"};
+        int r = javax.swing.JOptionPane.showOptionDialog(this,
+                "Factura No. " + f.getIdFactura() + " guardada.\n¿Desea guardar o imprimir la factura?",
+                "Factura emitida", javax.swing.JOptionPane.DEFAULT_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[2]);
+        if (r == 0) {
+            com.mycompany.mavenproject1.Servicios.DocumentoPdf.guardarFactura(this, f);
+        } else if (r == 1) {
+            com.mycompany.mavenproject1.Servicios.DocumentoPdf.imprimirFactura(this, f);
+        }
+    }
     // ---------- Repuestos en el detalle ----------
 
     // Cambia el campo Concepto por el combo de repuestos (o lo devuelve).
@@ -1018,10 +1073,32 @@ btnAgregarADetalleFacturaActionPerformed(evt);
             }
         } else if (jRBRepuesto.isSelected()) {
             f.setTipoFactura(Factura.TIPO_REPUESTO);
+            // Datos del comprador: si se dejan vacíos, se factura como consumidor final.
+            String nombre = txtNombreCliente.getText().trim();
+            String nit = txtNit.getText().trim();
+            String direccion = txtDireccion.getText().trim();
+            f.setNombreManual(nombre.isEmpty() ? "Consumidor final" : nombre);
+            f.setNitManual(nit.isEmpty() ? "CF" : nit);
+            f.setDireccionManual(direccion.isEmpty() ? "Ciudad" : direccion);
         }
 
         f.setDetalles(new java.util.ArrayList<>(detalles));
-        f.setFechaEmision(LocalDate.now());
+        if (jRBRepuesto.isSelected()) {
+            LocalDate fecha;
+            try {
+                fecha = LocalDate.parse(txtFechaEmision.getText().trim(), FORMATO_FECHA);
+            } catch (java.time.format.DateTimeParseException ex) {
+                aviso("La fecha debe tener el formato dd/MM/aaaa, por ejemplo 04/11/2026.");
+                return;
+            }
+            if (fecha.isAfter(LocalDate.now())) {
+                aviso("La fecha de emisión no puede ser futura.");
+                return;
+            }
+            f.setFechaEmision(fecha);
+        } else {
+            f.setFechaEmision(LocalDate.now());
+        }
 
         String error = FacturaServicio.getInstancia().validar(f);
         if (error != null) {
@@ -1030,6 +1107,7 @@ btnAgregarADetalleFacturaActionPerformed(evt);
         }
         FacturaServicio.getInstancia().guardar(f);
         aviso("Factura No. " + f.getIdFactura() + " guardada.\nTotal: Q " + formato(f.getTotal()));
+        ofrecerDocumento(f);
         iniciarFormulario();
     }
 
@@ -1154,6 +1232,7 @@ btnAgregarADetalleFacturaActionPerformed(evt);
             txtNombreCliente.setEditable(false);
             txtNit.setEditable(false);
             txtDireccion.setEditable(false);
+            txtFechaEmision.setEditable(false);
             btnAnular.setEnabled(facturaConsultada != null && !facturaConsultada.estaAnulada());
         } else {
             facturaConsultada = null;

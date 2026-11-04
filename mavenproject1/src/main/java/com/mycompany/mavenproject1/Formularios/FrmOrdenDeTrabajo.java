@@ -372,6 +372,7 @@ private static final java.util.logging.Logger logger = java.util.logging.Logger.
         btnModificar.addActionListener(e -> cargarOrdenSeleccionada());
         btnEliminar.addActionListener(e -> eliminarOrden());
         btnLimpiar.addActionListener(e -> limpiarFormulario());
+        crearMenuDocumento();
 
         cargarCombos();
         actualizarTabla();
@@ -511,6 +512,45 @@ private static final java.util.logging.Logger logger = java.util.logging.Logger.
 
     private void aviso(String mensaje) {
         javax.swing.JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    // ---------- PDF e impresión (a elección del usuario) ----------
+
+    private void crearMenuDocumento() {
+        javax.swing.JMenuBar barra = new javax.swing.JMenuBar();
+        javax.swing.JMenu menu = new javax.swing.JMenu("Documento");
+        menu.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13));
+        javax.swing.JMenuItem miPdf = new javax.swing.JMenuItem("Guardar orden como PDF...");
+        javax.swing.JMenuItem miImprimir = new javax.swing.JMenuItem("Imprimir orden...");
+        miPdf.addActionListener(e -> {
+            OrdenDeTrabajo o = ordenElegidaEnTabla();
+            if (o != null) {
+                com.mycompany.mavenproject1.Servicios.DocumentoPdf.guardarOrden(this, o);
+            }
+        });
+        miImprimir.addActionListener(e -> {
+            OrdenDeTrabajo o = ordenElegidaEnTabla();
+            if (o != null) {
+                com.mycompany.mavenproject1.Servicios.DocumentoPdf.imprimirOrden(this, o);
+            }
+        });
+        menu.add(miPdf);
+        menu.add(miImprimir);
+        barra.add(menu);
+        setJMenuBar(barra);
+    }
+
+    private OrdenDeTrabajo ordenElegidaEnTabla() {
+        int fila = jtblOrdenDeServicio.getSelectedRow();
+        if (fila < 0) {
+            aviso("Primero seleccione en la tabla la orden que desea guardar o imprimir.");
+            return null;
+        }
+        OrdenDeTrabajo o = servicio.buscarPorCodigo(jtblOrdenDeServicio.getValueAt(fila, 0).toString());
+        if (o == null) {
+            aviso("No se encontró la orden seleccionada.");
+        }
+        return o;
     }
     /**
      * @param args the command line arguments

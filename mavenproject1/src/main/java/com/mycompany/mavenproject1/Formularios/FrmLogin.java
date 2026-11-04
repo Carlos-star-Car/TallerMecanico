@@ -45,7 +45,7 @@ public class FrmLogin extends JFrame {
     public FrmLogin() {
         setTitle("Talleres Emanuel - Inicio de sesión");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(900, 520);
+        setSize(860, 520);
         setResizable(false);
         construir();
         getRootPane().setDefaultButton(btnIngresar);   // Enter = Ingresar
@@ -86,8 +86,8 @@ public class FrmLogin extends JFrame {
 
         JPanel barra = new JPanel();
         barra.setBackground(ROJO);
-        barra.setMaximumSize(new Dimension(50, 4));
-        barra.setPreferredSize(new Dimension(50, 4));
+        barra.setMaximumSize(new Dimension(56, 4));
+        barra.setPreferredSize(new Dimension(56, 4));
         barra.setAlignmentX(Component.LEFT_ALIGNMENT);
         arriba.add(barra);
         arriba.add(Box.createVerticalStrut(20));
@@ -122,7 +122,7 @@ public class FrmLogin extends JFrame {
         JPanel form = new JPanel();
         form.setOpaque(false);
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
-        form.setPreferredSize(new Dimension(330, 360));
+        form.setPreferredSize(new Dimension(340, 360));
 
         JLabel titulo = new JLabel("Iniciar sesión");
         titulo.setFont(new Font("Segoe UI", Font.BOLD, 26));
@@ -161,8 +161,8 @@ public class FrmLogin extends JFrame {
         btnIngresar.setForeground(Color.WHITE);
         btnIngresar.setFocusPainted(false);
         btnIngresar.setAlignmentX(Component.LEFT_ALIGNMENT);
-        btnIngresar.setPreferredSize(new Dimension(310, 48));
-        btnIngresar.setMaximumSize(new Dimension(310, 48));
+        btnIngresar.setPreferredSize(new Dimension(340, 48));
+        btnIngresar.setMaximumSize(new Dimension(340, 48));
         btnIngresar.addActionListener(e -> ingresar());
         form.add(btnIngresar);
         form.add(Box.createVerticalStrut(14));
@@ -187,8 +187,8 @@ public class FrmLogin extends JFrame {
 
     private void estilizarCampo(JTextField campo) {
         campo.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        campo.setPreferredSize(new Dimension(310, 44));
-        campo.setMaximumSize(new Dimension(310, 44));
+        campo.setPreferredSize(new Dimension(340, 44));
+        campo.setMaximumSize(new Dimension(340, 44));
         campo.setAlignmentX(Component.LEFT_ALIGNMENT);
     }
 
